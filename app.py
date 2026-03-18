@@ -18,18 +18,15 @@ import os
 import pickle
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "models", "best_ml_model.pkl")
-vectorizer_path = os.path.join(BASE_DIR, "models", "tfidf_vectorizer.pkl")
+model_path = os.path.join(BASE_DIR, "models", "best_ml_model.pkl")
+
+# تحميل الموديل مباشرة في الواجهة
 try:
-    with open(MODEL_PATH, 'rb') as f:
+    with open(model_path, 'rb') as f:
         model = pickle.load(f)
-    
-    with open(vectorizer_path, 'rb') as v:
-        vectorizer = pickle.load(v)
-    
-    st.success("✅ تم تحميل الموديلات بنجاح!")
-except FileNotFoundError:
-    st.error(f"❌ لم يتم العثور على الموديل في المسار: {MODEL_PATH}")
+    st.sidebar.success("✅ الموديل جاهز للعمل!")
+except Exception as e:
+    st.error(f"❌ خطأ في تحميل الموديل: {e}")
 
 # ─── إعداد الصفحة ────────────────────────────────────────────────────────────
 st.set_page_config(
