@@ -38,4 +38,3 @@ streamlit
 requests
 plotly
 python-telegram-bot
-tensorflow-cpu==2.15.0
