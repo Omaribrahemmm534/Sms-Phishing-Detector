@@ -14,6 +14,22 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 from datetime import datetime
+import os
+import pickle
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "best_ml_model.pkl")
+vectorizer_path = os.path.join(BASE_DIR, "models", "tfidf_vectorizer.pkl")
+try:
+    with open(MODEL_PATH, 'rb') as f:
+        model = pickle.load(f)
+    
+    with open(vectorizer_path, 'rb') as v:
+        vectorizer = pickle.load(v)
+    
+    st.success("✅ تم تحميل الموديلات بنجاح!")
+except FileNotFoundError:
+    st.error(f"❌ لم يتم العثور على الموديل في المسار: {MODEL_PATH}")
 
 # ─── إعداد الصفحة ────────────────────────────────────────────────────────────
 st.set_page_config(
